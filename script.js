@@ -8,9 +8,18 @@ const bookPagesInput = document.querySelector("#book-pages");
 const bookReadInput = document.querySelector("#book-read");
 const bookList = document.querySelector("#book-list");
 const bookRowTemplate = document.querySelector("#book-row");
-const titleHeader = document.querySelector("thead>.title>p");
-const authorHeader = document.querySelector("thead>.author>p");
+const titleHeader = document.querySelector("thead .title p");
+const authorHeader = document.querySelector("thead .author p");
 
+titleHeader.addEventListener("click", () => {
+    sortBooks("title");
+    displayBooks();
+});
+
+authorHeader.addEventListener("click", () => {
+    sortBooks("author");
+    displayBooks();
+});
 openAddBookModalButton.addEventListener("click", () => {
     addBookModal.classList.toggle("open");
 });

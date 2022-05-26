@@ -39,6 +39,13 @@ addBookForm.addEventListener("submit", (e) => {
 
 let myLibrary = [];
 
+myLibrary.push(new Book("Lord of the Rings", "J.R.R. Tolkien", 323, true));
+myLibrary.push(new Book("Game of Thrones", "George R.R. Martin", 887, false));
+myLibrary.push(new Book("Harry Potter", "J.K. Rowling", 411, true));
+myLibrary.push(new Book("Moby Dick", "Herman Melville", 100, false));
+
+displayBooks();
+
 function Book(title, author, numPages, read){
     this.title = title;
     this.author = author;
@@ -59,29 +66,55 @@ function addBookToLibrary(){
     let newBook = new Book(title, author, numPages, read);
 
     myLibrary.push(newBook);
-    displayAddedBook(newBook);
+    displayAddedBook(newBook, myLibrary.length - 1, myLibrary);
 }
 
 function displayBooks(){
-    myLibrary.forEach( book => {
-        let newRow = createBookRow(book);
+    // Make sure list is clear before adding more so it doesn't pile on duplicate listings
+    clearBookList();
+
+    myLibrary.forEach( (book, i, arr) => {
+        let newRow = createBookRow(book, i, arr);
         bookList.appendChild(newRow);
     });
 }
 
-function displayAddedBook(newBook){
-    let newRow = createBookRow(newBook);
+function displayAddedBook(newBook, i, arr){
+    let newRow = createBookRow(newBook, i, arr);
     bookList.appendChild(newRow);
 }
-function createBookRow(book){
-    bookRow = bookRowTemplate.content.cloneNode(true);
-    cell = bookRow.querySelectorAll("td");
+function createBookRow(book, i, arr){
+    const bookRow = bookRowTemplate.content.cloneNode(true);
+    const row = bookRow.querySelector("tr");
+    const cell = bookRow.querySelectorAll("td");
+
+    row.setAttribute("data-index", i);
     cell[0].textContent = book.title;
     cell[1].textContent = book.author;
     cell[2].textContent = book.numPages ? book.numPages : '-';
     cell[3].textContent = book.read ? "✔" : "";
+    cell[4].addEventListener("click", (e) => { 
+        e.stopPropagation();
+        removeBook(row);
+    });
 
     return bookRow;
 }
 
+function removeBook(row){
+    let index = Number(row.getAttribute("data-index"));
 
+    myLibrary.splice(index, 1);
+
+    displayBooks();
+    
+
+}
+
+function clearBookList(){
+    const rows = bookList.querySelectorAll("tr");
+
+    rows.forEach( item => {
+        bookList.removeChild(item);
+    })
+}

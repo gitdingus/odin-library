@@ -112,7 +112,7 @@ tbody tr:nth-child(even){
     background-color: #e2e8f0;
     display: grid;
     grid-template-columns: 75px 250px;
-    grid-auto-rows: 30px;
+    grid-auto-rows: auto;
     align-items: center;
     align-content: center;
     row-gap: 14px;

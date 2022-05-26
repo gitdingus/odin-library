@@ -91,6 +91,11 @@ tbody tr:nth-child(even){
     text-align: center;
 }
 
+td.read,
+td.remove{
+    cursor: pointer;
+}
+
 #add-book-modal{
     display: none;
 }

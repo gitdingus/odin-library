@@ -61,6 +61,45 @@ Book.prototype.toggleRead = function(){
     this.read = this.read ? false : true;
 }
 
+Book.prototype.sortBooks(byField){
+    let comparator = undefined;
+    if (byField === "title"){
+        comparator = this.compareTitles;
+    }
+    else if (byField === "author"){
+        comparator = this.compareAuthor;
+    }
+
+    if (comparator !== undefined){
+        myLibrary.sort(comparator);
+    }
+
+    return myLibrary;
+}
+
+Book.prototype.compareTitles(book1, book2){
+    if (book1.title > book2.title){
+        return -1;
+    }
+    else if(book1.title < book2.title){
+        return 1;
+    }
+    else if (book1.title === book2.title){
+        return 0;
+    }
+}
+
+Book.prototype.compareAuthor(book1, book2){
+    if (book1.author > book2.author){
+        return -1;
+    }
+    else if(book1.author < book2.author){
+        return 1;
+    }
+    else if (book1.author === book2.author){
+        return 0;
+    }
+}
 function addBookToLibrary(){
     let title = bookTitleInput.value;
     let author = bookAuthorInput.value;

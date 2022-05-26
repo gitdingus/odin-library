@@ -57,6 +57,10 @@ Book.prototype.info = function(){
     return `${this.title} by ${this.author}, ${this.numPages}, ${this.read === true ? "read" : "not yet read"}`;
 }
 
+Book.prototype.toggleRead = function(){
+    this.read = this.read ? false : true;
+}
+
 function addBookToLibrary(){
     let title = bookTitleInput.value;
     let author = bookAuthorInput.value;
@@ -92,7 +96,13 @@ function createBookRow(book, i, arr){
     cell[0].textContent = book.title;
     cell[1].textContent = book.author;
     cell[2].textContent = book.numPages ? book.numPages : '-';
-    cell[3].textContent = book.read ? "✔" : "";
+    cell[3].textContent = book.read ? "✔" : "-";
+
+    cell[3].addEventListener("click", (e) => {
+        book.toggleRead();
+        cell[3].textContent = book.read ? "✔" : "-";
+    });
+
     cell[4].addEventListener("click", (e) => { 
         e.stopPropagation();
         removeBook(row);

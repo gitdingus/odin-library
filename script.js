@@ -8,8 +8,18 @@ const bookPagesInput = document.querySelector("#book-pages");
 const bookReadInput = document.querySelector("#book-read");
 const bookList = document.querySelector("#book-list");
 const bookRowTemplate = document.querySelector("#book-row");
+
 openAddBookModalButton.addEventListener("click", () => {
     addBookModal.classList.toggle("open");
+});
+
+addBookModal.addEventListener("click", (e) => {
+    //Only want the add book dialog to disappear if user clicked out of it.
+    if (e.target !== addBookModal){
+        return;
+    }
+    addBookModal.classList.toggle("open");
+
 });
 
 cancelAddBookModalButton.addEventListener("click", () =>{

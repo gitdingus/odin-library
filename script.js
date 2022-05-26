@@ -8,6 +8,8 @@ const bookPagesInput = document.querySelector("#book-pages");
 const bookReadInput = document.querySelector("#book-read");
 const bookList = document.querySelector("#book-list");
 const bookRowTemplate = document.querySelector("#book-row");
+const titleHeader = document.querySelector("thead>.title>p");
+const authorHeader = document.querySelector("thead>.author>p");
 
 openAddBookModalButton.addEventListener("click", () => {
     addBookModal.classList.toggle("open");
@@ -61,7 +63,7 @@ Book.prototype.toggleRead = function(){
     this.read = this.read ? false : true;
 }
 
-Book.prototype.sortBooks(byField){
+function sortBooks (byField){
     let comparator = undefined;
     if (byField === "title"){
         comparator = this.compareTitles;
@@ -77,11 +79,11 @@ Book.prototype.sortBooks(byField){
     return myLibrary;
 }
 
-Book.prototype.compareTitles(book1, book2){
-    if (book1.title > book2.title){
+function compareTitles (book1, book2){
+    if (book1.title < book2.title){
         return -1;
     }
-    else if(book1.title < book2.title){
+    else if(book1.title > book2.title){
         return 1;
     }
     else if (book1.title === book2.title){
@@ -89,11 +91,11 @@ Book.prototype.compareTitles(book1, book2){
     }
 }
 
-Book.prototype.compareAuthor(book1, book2){
-    if (book1.author > book2.author){
+function compareAuthor (book1, book2){
+    if (book1.author < book2.author){
         return -1;
     }
-    else if(book1.author < book2.author){
+    else if(book1.author > book2.author){
         return 1;
     }
     else if (book1.author === book2.author){

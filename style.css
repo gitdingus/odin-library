@@ -68,6 +68,11 @@ tbody td{
     padding: 10px;
 }
 
+thead .title p,
+thead .author p{
+    cursor: pointer;
+}
+
 tbody tr:nth-child(even){
     background-color: #e2e8f0;
 }

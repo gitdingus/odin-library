@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&family=Roboto&display=swap');*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    display: flex;
+    justify-content: center;
+    font-family: Roboto;
+}
+.container{
+    width: 75vw;
+}
+.header{
+    background-color: #cbd5e1;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px 100px;
+}
+
+.header h1{
+    font-family: 'Hanalei Fill', cursive;
+    font-size: 3rem;
+}
+
+button{
+    background-color: #64748b;
+    color: #f2f4f7;
+    border: 0;
+    border-radius: 20px;
+    font-size: 20px;
+    font-family: inherit;
+    height: 40px;
+    padding: 12px 20px;
+
+    outline: 2px solid #475569;
+
+    align-self: flex-end;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button:hover{
+    outline: 2px solid #cbd5e1;
+}
+
+.library{
+    display: flex;
+    justify-content: center;
+}
+
+table{
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%;
+}
+
+thead tr{
+    background-color: #94a3b8;
+    padding: 10px;
+}
+
+thead th,
+tbody td{
+    padding: 10px;
+}
+
+tbody tr:nth-child(even){
+    background-color: #e2e8f0;
+}
+
+th.title{
+    width: 35%;
+}
+
+th.author{
+    width: 30%;
+}
+
+th.pages{
+    width: 15%;
+}
+
+th.read{
+    width: 10%;
+}
+
+#add-book-modal{
+    display: none;
+}
+#add-book-modal.open{
+    position: absolute;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(51, 65, 85, .9);
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+}
+
+#add-book-modal .new-book form{
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #e2e8f0;
+    height: 50vh;
+    display: grid;
+    grid-template-columns: 75px 250px;
+    grid-auto-rows: 30px;
+    align-items: center;
+    align-content: center;
+    row-gap: 14px;
+    column-gap: 20px;
+    top: calc(50vh - 200px);
+}
+
+.new-book h1{
+    grid-area: 1 / 1 / 2 / 3;
+    text-align: center;
+    font-size: 1.5rem;
+}
+.new-book label{
+    justify-self: right;
+}
+
+.new-book input{
+    font-size: 1rem;
+    padding: 5px 15px;
+    border-radius:15px;
+    border: 0;
+}
+
+.new-book .buttons{
+    grid-area: 6 / 2 / 7 / 3;
+    display: flex;
+    justify-self: end;
+    flex-grow: 1;
+    gap: 12px;
+}
+
+.buttons button{
+    font-size: 1rem;
+}

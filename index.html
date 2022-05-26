@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js" defer></script>
+        <title>Odin Library</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Odin Library</h1>
+                <button id="open-add-book-modal">Add book +</button>
+            </div>
+            <div class="library">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="title">Title</th>
+                            <th class="author">Author</th>
+                            <th class="pages">Pages</th>
+                            <th class="read">Read</th>
+                        </tr>
+                    </thead>
+                    <tbody id="book-list">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="add-book-modal">
+            <div class="new-book">
+                <form id="add-book-form">
+                    <h1>Add New Book</h1>
+                    <label for="book-title">Title</label>
+                    <input id="book-title" type="text" required>
+                    <label for="book-author">Author</label>
+                    <input id="book-author" type="text" required>
+                    <label for="book-pages">Pages</label>
+                    <input id="book-pages" type="number">
+                    <label for="book-read">Read</label>
+                    <input id="book-read" type="checkbox">
+                    <div class="buttons">
+                        <button id="cancel-add-book-button">Cancel</button>
+                        <button id="add-new-book-button" type="submit">Add Book</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+
+        <template id="book-row">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </template>
+    </body>
+</html>

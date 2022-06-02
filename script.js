@@ -1,3 +1,24 @@
+class Book {
+    title = "";
+    author = "";
+    numPages = 0;
+    read = false;
+    constructor(title, author, numPages, read){
+        this.title = title;
+        this.author = author;
+        this.numPages = numPages;
+        this.read = read;
+    }
+
+    info () {
+        return `${this.title} by ${this.author}, ${this.numPages}, ${this.read === true ? "read" : "not yet read"};`
+    }
+
+    toggleRead () {
+        this.read = this.read ? false : true;
+    }
+}
+
 const openAddBookModalButton = document.querySelector("#open-add-book-modal");
 const cancelAddBookModalButton = document.querySelector("#cancel-add-book-button");
 const addBookForm = document.querySelector("#add-book-form");
@@ -57,20 +78,20 @@ myLibrary.push(new Book("Moby Dick", "Herman Melville", 100, false));
 
 displayBooks();
 
-function Book(title, author, numPages, read){
-    this.title = title;
-    this.author = author;
-    this.numPages = numPages;
-    this.read = read;
-}
+// function Book(title, author, numPages, read){
+//     this.title = title;
+//     this.author = author;
+//     this.numPages = numPages;
+//     this.read = read;
+// }
 
-Book.prototype.info = function(){
-    return `${this.title} by ${this.author}, ${this.numPages}, ${this.read === true ? "read" : "not yet read"}`;
-}
+// Book.prototype.info = function(){
+//     return `${this.title} by ${this.author}, ${this.numPages}, ${this.read === true ? "read" : "not yet read"}`;
+// }
 
-Book.prototype.toggleRead = function(){
-    this.read = this.read ? false : true;
-}
+// Book.prototype.toggleRead = function(){
+//     this.read = this.read ? false : true;
+// }
 
 function sortBooks (byField){
     let comparator = undefined;

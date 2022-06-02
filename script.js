@@ -41,7 +41,130 @@ class Book {
             return 0;
         }
     }
+
+    static sameBook (book1, book2){
+
+        if (book1.title !== book2.title 
+            || book1.author !== book2.author
+            || book1.numPages !== book2.numPages
+            || book1.read !== book2.read){
+            return false;
+        }
+        else{
+            return true;
+        }
+
+
+    }
 }
+
+const Library = (function (){
+
+    const _myLibrary = [];
+    let _lastBookAdded = {};
+
+    function getBooks(){
+        return _myLibrary;
+    }
+    
+    function getLastBookAdded(){
+        return _lastBookAdded;
+    }
+    function addBook(book){
+        _myLibrary.push(book);
+        _lastBookAdded = book;
+    }   
+    
+    function addBookFromInfo(title, author, numPages, read){
+        const book = new Book(title, author, numPages, read);
+        addBook(book);
+    }
+
+    //takes array of book objects
+    function addBooks(books){
+        books.forEach( (book) => addBook(book) );
+    }
+
+    function removeBook(index){
+        _myLibrary.splice(index, 1);
+    }
+
+    function sortLibrary(byField){
+        let comparator = undefined;
+
+        if (byField === "title"){
+            comparator = Book.compareTitles;
+        }
+        else if (byField === "author"){
+            comparator = Book.compareAuthor;
+        }
+    
+        if (comparator !== undefined){
+            myLibrary.sort(comparator);
+        }
+    
+        return myLibrary;
+    }
+
+})();
+
+//Functionality in Library module
+// function sortBooks (byField){
+//     let comparator = undefined;
+//     if (byField === "title"){
+//         comparator = Book.compareTitles;
+//     }
+//     else if (byField === "author"){
+//         comparator = Book.compareAuthor;
+//     }
+
+//     if (comparator !== undefined){
+//         myLibrary.sort(comparator);
+//     }
+
+//     return myLibrary;
+// }
+
+//Functionality to add book in Library module
+//Module does not display new book
+function addBookToLibrary(){
+    let title = bookTitleInput.value;
+    let author = bookAuthorInput.value;
+    let numPages = bookPagesInput.value;
+    let read = bookReadInput.checked;
+
+    let newBook = new Book(title, author, numPages, read);
+
+    myLibrary.push(newBook);
+    displayAddedBook(newBook, myLibrary.length - 1, myLibrary);
+}
+
+
+let myLibrary = [];
+
+myLibrary.push(new Book("Lord of the Rings", "J.R.R. Tolkien", 323, true));
+myLibrary.push(new Book("Game of Thrones", "George R.R. Martin", 887, false));
+myLibrary.push(new Book("Harry Potter", "J.K. Rowling", 411, true));
+myLibrary.push(new Book("Moby Dick", "Herman Melville", 100, false));
+
+displayBooks();
+
+
+
+
+//Functionality added to remove book in Library module
+//does not update display
+function removeBook(row){
+    let index = Number(row.getAttribute("data-index"));
+
+    myLibrary.splice(index, 1);
+
+    displayBooks();
+    
+
+}
+
+
 
 const openAddBookModalButton = document.querySelector("#open-add-book-modal");
 const cancelAddBookModalButton = document.querySelector("#cancel-add-book-button");
@@ -93,42 +216,7 @@ addBookForm.addEventListener("submit", (e) => {
 });
 
 
-let myLibrary = [];
 
-myLibrary.push(new Book("Lord of the Rings", "J.R.R. Tolkien", 323, true));
-myLibrary.push(new Book("Game of Thrones", "George R.R. Martin", 887, false));
-myLibrary.push(new Book("Harry Potter", "J.K. Rowling", 411, true));
-myLibrary.push(new Book("Moby Dick", "Herman Melville", 100, false));
-
-displayBooks();
-
-function sortBooks (byField){
-    let comparator = undefined;
-    if (byField === "title"){
-        comparator = Book.compareTitles;
-    }
-    else if (byField === "author"){
-        comparator = Book.compareAuthor;
-    }
-
-    if (comparator !== undefined){
-        myLibrary.sort(comparator);
-    }
-
-    return myLibrary;
-}
-
-function addBookToLibrary(){
-    let title = bookTitleInput.value;
-    let author = bookAuthorInput.value;
-    let numPages = bookPagesInput.value;
-    let read = bookReadInput.checked;
-
-    let newBook = new Book(title, author, numPages, read);
-
-    myLibrary.push(newBook);
-    displayAddedBook(newBook, myLibrary.length - 1, myLibrary);
-}
 
 function displayBooks(){
     // Make sure list is clear before adding more so it doesn't pile on duplicate listings
@@ -168,15 +256,7 @@ function createBookRow(book, i, arr){
     return bookRow;
 }
 
-function removeBook(row){
-    let index = Number(row.getAttribute("data-index"));
 
-    myLibrary.splice(index, 1);
-
-    displayBooks();
-    
-
-}
 
 function clearBookList(){
     const rows = bookList.querySelectorAll("tr");

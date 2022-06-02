@@ -120,10 +120,10 @@ displayBooks();
 function sortBooks (byField){
     let comparator = undefined;
     if (byField === "title"){
-        comparator = this.compareTitles;
+        comparator = Book.compareTitles;
     }
     else if (byField === "author"){
-        comparator = this.compareAuthor;
+        comparator = Book.compareAuthor;
     }
 
     if (comparator !== undefined){

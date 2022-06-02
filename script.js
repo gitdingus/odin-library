@@ -17,6 +17,30 @@ class Book {
     toggleRead () {
         this.read = this.read ? false : true;
     }
+
+    static compareTitles (book1, book2){
+        if (book1.title < book2.title){
+            return -1;
+        }
+        else if(book1.title > book2.title){
+            return 1;
+        }
+        else if (book1.title === book2.title){
+            return 0;
+        }
+    }
+    
+    static compareAuthor (book1, book2){
+        if (book1.author < book2.author){
+            return -1;
+        }
+        else if(book1.author > book2.author){
+            return 1;
+        }
+        else if (book1.author === book2.author){
+            return 0;
+        }
+    }
 }
 
 const openAddBookModalButton = document.querySelector("#open-add-book-modal");
@@ -109,29 +133,6 @@ function sortBooks (byField){
     return myLibrary;
 }
 
-function compareTitles (book1, book2){
-    if (book1.title < book2.title){
-        return -1;
-    }
-    else if(book1.title > book2.title){
-        return 1;
-    }
-    else if (book1.title === book2.title){
-        return 0;
-    }
-}
-
-function compareAuthor (book1, book2){
-    if (book1.author < book2.author){
-        return -1;
-    }
-    else if(book1.author > book2.author){
-        return 1;
-    }
-    else if (book1.author === book2.author){
-        return 0;
-    }
-}
 function addBookToLibrary(){
     let title = bookTitleInput.value;
     let author = bookAuthorInput.value;

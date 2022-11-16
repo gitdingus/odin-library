@@ -1,8 +1,4 @@
 class Book {
-    title = "";
-    author = "";
-    numPages = 0;
-    read = false;
     constructor(title, author, numPages, read){
         this.title = title;
         this.author = author;

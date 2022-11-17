@@ -7,10 +7,29 @@ import trashPng from './trash-can-outline.png';
 
 const loginContainer = document.querySelector('#user-login');
 const root = ReactDOM.createRoot(loginContainer);
+let currentUser = null;
+
+const authHelpers = (function helpersForFirebaseAuth() {
+    function loginUser({username, password}) {
+        console.log('login', username, password);
+    }
+
+    function createUser({username, password}) {
+        console.log('create user', username, password);
+    }
+
+    return {
+        loginUser, createUser
+    }
+})();
 
 root.render(
     <React.StrictMode>
-        <Login />
+        <Login
+            user={currentUser}
+            login={authHelpers.loginUser}
+            createUser={authHelpers.createUser}
+        />
     </React.StrictMode>
 );
 

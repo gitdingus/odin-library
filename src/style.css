@@ -101,10 +101,10 @@ td.remove{
     cursor: pointer;
 }
 
-#add-book-modal{
+.modal{
     display: none;
 }
-#add-book-modal.open{
+.modal.open{
     position: absolute;
     display:flex;
     justify-content: center;
@@ -116,7 +116,7 @@ td.remove{
     left: 0;
 }
 
-#add-book-modal .new-book form{
+.modal form{
     padding: 30px;
     border-radius: 10px;
     background-color: #e2e8f0;
@@ -129,23 +129,23 @@ td.remove{
     column-gap: 20px;
 }
 
-.new-book h1{
+.modal h1{
     grid-area: 1 / 1 / 2 / 3;
     text-align: center;
     font-size: 1.5rem;
 }
-.new-book label{
+.modal label{
     justify-self: right;
 }
 
-.new-book input{
+.modal input{
     font-size: 1rem;
     padding: 5px 15px;
     border-radius:15px;
     border: 0;
 }
 
-.new-book .buttons{
+.modal .buttons{
     grid-area: 6 / 2 / 7 / 3;
     display: flex;
     justify-self: end;

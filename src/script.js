@@ -1,4 +1,5 @@
 import './style.css';
+import trashPng from './trash-can-outline.png';
 
 class Book {
     constructor(title, author, numPages, read){
@@ -204,6 +205,8 @@ const libraryController = ( function (){
 
     function _createBookRow(book, i, arr){
         const bookRow = _bookRowTemplate.content.cloneNode(true);
+        const trashImg = bookRow.querySelector('img');
+
         const row = bookRow.querySelector("tr");
         const cell = bookRow.querySelectorAll("td");
     
@@ -218,6 +221,7 @@ const libraryController = ( function (){
             cell[3].textContent = book.read ? "✔" : "-";
         });
     
+        trashImg.src = trashPng;
         cell[4].addEventListener("click", (e) => { 
             e.stopPropagation();
             removeBook(row);

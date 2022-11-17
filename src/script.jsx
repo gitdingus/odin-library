@@ -1,5 +1,18 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Login from './components/Login.jsx';
 import './style.css';
 import trashPng from './trash-can-outline.png';
+
+
+const loginContainer = document.querySelector('#user-login');
+const root = ReactDOM.createRoot(loginContainer);
+
+root.render(
+    <React.StrictMode>
+        <Login />
+    </React.StrictMode>
+);
 
 class Book {
     constructor(title, author, numPages, read){

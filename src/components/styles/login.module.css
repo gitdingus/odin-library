@@ -1,0 +1,11 @@
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+
+}
+
+.buttons button {
+  font-size: 14px;
+  width: 150px;
+}

@@ -1,3 +1,5 @@
+import './style.css';
+
 class Book {
     constructor(title, author, numPages, read){
         this.title = title;

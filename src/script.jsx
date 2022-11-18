@@ -21,7 +21,6 @@ const root = ReactDOM.createRoot(loginContainer);
 let currentUser = null;
 
 function renderLogin() {
-    console.log('renderLogin()');
     root.render(
         <React.StrictMode>
             <Login
@@ -35,24 +34,20 @@ function renderLogin() {
 }
 
 const unsubscribeToAuth = onAuthStateChanged(firebaseAuth, (user) => {
-    console.log('auth state changed');
     currentUser = user;
     renderLogin(currentUser);
 });
 
 const authHelpers = (function helpersForFirebaseAuth() {
     function loginUser({username, password}) {
-        console.log('login', username, password);
         signInWithEmailAndPassword(firebaseAuth, username, password);
     }
 
     function createUser({username, password}) {
-        console.log('create user', username, 'password');
         createUserWithEmailAndPassword(firebaseAuth, username, password);
     }
 
     function signOutUser() {
-        console.log('sign out requested');
         signOut(firebaseAuth);
     }
 

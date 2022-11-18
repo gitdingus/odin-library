@@ -1,10 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Login from './components/Login.jsx';
+import firebaseConfig from './firebase.config.js';
+import { initializeApp } from 'firebase/app';
+import { 
+    getAuth, 
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut,
+} from 'firebase/auth';
 import './style.css';
 import trashPng from './trash-can-outline.png';
 
 
+const firebaseApp = initializeApp(firebaseConfig);
+const firebaseAuth = getAuth(firebaseApp);
 const loginContainer = document.querySelector('#user-login');
 const root = ReactDOM.createRoot(loginContainer);
 let currentUser = null;
@@ -23,17 +34,30 @@ function renderLogin() {
     );
 }
 
+const unsubscribeToAuth = onAuthStateChanged(firebaseAuth, (user) => {
+    console.log('auth state changed');
+    currentUser = user;
+    renderLogin(currentUser);
+});
+
 const authHelpers = (function helpersForFirebaseAuth() {
     function loginUser({username, password}) {
         console.log('login', username, password);
+        signInWithEmailAndPassword(firebaseAuth, username, password);
     }
 
     function createUser({username, password}) {
-        console.log('create user', username, password);
+        console.log('create user', username, 'password');
+        createUserWithEmailAndPassword(firebaseAuth, username, password);
+    }
+
+    function signOutUser() {
+        console.log('sign out requested');
+        signOut(firebaseAuth);
     }
 
     return {
-        loginUser, createUser
+        loginUser, createUser, signOutUser
     }
 })();
 
@@ -201,7 +225,7 @@ const libraryController = ( function (){
     });
 
     _openAddBookModalButton.addEventListener("click", () => {
-        _addBookModal.classList.toggle("open");
+       _addBookModal.classList.toggle("open");
     });
 
     _addBookModal.addEventListener("click", (e) => {
@@ -217,10 +241,6 @@ const libraryController = ( function (){
         _addBookModal.classList.toggle("open");
     });
     
-    
-    
-    
-
     function addBookToLibrary(){
         let title = _bookTitleInput.value;
         let author = _bookAuthorInput.value;

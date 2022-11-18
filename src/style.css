@@ -29,10 +29,12 @@ button{
     color: #f2f4f7;
     border: 0;
     border-radius: 20px;
-    font-size: 20px;
     font-family: inherit;
     height: 40px;
     padding: 12px 20px;
+
+    font-size: 14px;
+    width: 150px;
 
     border: 2px solid #475569;
 

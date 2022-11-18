@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './styles/login.module.css';
 
-export default function Login({user, login, createUser}) {
+export default function Login({user, login, createUser, signOut}) {
   const [mode, setMode] = useState('display');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -36,6 +36,10 @@ export default function Login({user, login, createUser}) {
     setMode('display');
   }
 
+  const signOutClicked = () => {
+    signOut();
+  }
+
   if (mode === 'display') {
     if (user === null) {
       return (
@@ -47,8 +51,9 @@ export default function Login({user, login, createUser}) {
     }
 
     return (
-      <div>
-        <p>{user.username} logged in</p>
+      <div className={styles.buttons}>
+        <p>{user.email} logged in</p>
+        <button type="button" onClick={signOutClicked}>Sign Out</button>
       </div>
     )
   }

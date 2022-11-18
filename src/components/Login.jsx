@@ -9,25 +9,23 @@ export default function Login({user, login, createUser}) {
 
   const loginClicked = (e) => {
     e.preventDefault();
-
     login({
       username,
       password,
     });
     
-    setMode('display');
+    cancelForm();
   };
 
   const createUserClicked = (e) => {
     e.preventDefault();
-
     if (password === confirmPassword) {
       createUser({
         username,
         password,
       });
 
-      setMode('display');
+      cancelForm();
     }
   };
 

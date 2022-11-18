@@ -9,6 +9,20 @@ const loginContainer = document.querySelector('#user-login');
 const root = ReactDOM.createRoot(loginContainer);
 let currentUser = null;
 
+function renderLogin() {
+    console.log('renderLogin()');
+    root.render(
+        <React.StrictMode>
+            <Login
+                user={currentUser}
+                login={authHelpers.loginUser}
+                createUser={authHelpers.createUser}
+                signOut={authHelpers.signOutUser}
+            />
+        </React.StrictMode>
+    );
+}
+
 const authHelpers = (function helpersForFirebaseAuth() {
     function loginUser({username, password}) {
         console.log('login', username, password);
@@ -23,15 +37,7 @@ const authHelpers = (function helpersForFirebaseAuth() {
     }
 })();
 
-root.render(
-    <React.StrictMode>
-        <Login
-            user={currentUser}
-            login={authHelpers.loginUser}
-            createUser={authHelpers.createUser}
-        />
-    </React.StrictMode>
-);
+renderLogin(currentUser);
 
 class Book {
     constructor(title, author, numPages, read){

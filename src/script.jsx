@@ -11,12 +11,23 @@ import {
     onAuthStateChanged,
     signOut,
 } from 'firebase/auth';
+import {
+    getFirestore,
+    collection,
+    doc,
+    query,
+    orderBy,
+    addDoc,
+    getDocs,
+    deleteDoc,
+    runTransaction,
+} from 'firebase/firestore';
 import './style.css';
 import trashPng from './trash-can-outline.png';
 
-
 const firebaseApp = initializeApp(firebaseConfig);
 const firebaseAuth = getAuth(firebaseApp);
+const firebaseDb = getFirestore(firebaseApp);
 const loginContainer = document.querySelector('#user-login');
 const root = ReactDOM.createRoot(loginContainer);
 let currentUser = null;

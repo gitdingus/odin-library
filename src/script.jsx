@@ -46,11 +46,6 @@ function renderLogin() {
     );
 }
 
-const unsubscribeToAuth = onAuthStateChanged(firebaseAuth, (user) => {
-    currentUser = user;
-    renderLogin(currentUser);
-});
-
 const authHelpers = (function helpersForFirebaseAuth() {
     function loginUser({username, password}) {
         signInWithEmailAndPassword(firebaseAuth, username, password);
@@ -481,3 +476,24 @@ const libraryController = function (library){
         cleanUpListeners,
     }
 };
+
+let libController; 
+
+const unsubscribeToAuth = onAuthStateChanged(firebaseAuth, (user) => {
+    currentUser = user;
+
+    if (currentUser !== null) {
+        if (libController !== undefined) {
+            libController.cleanUpListeners();
+        }
+        libController = libraryController(firebaseLibrary());
+        libController.loadBooks();
+    } else {
+        if (libController !== undefined) {
+            libController.cleanUpListeners();
+        }
+        libController = libraryController(volatileLibrary());
+        libController.loadBooks();
+    }
+    renderLogin(currentUser);
+});

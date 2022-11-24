@@ -111,6 +111,7 @@ class Book {
             return true;
         }
 
+const volatileLibrary = function () {
 
     }
 }

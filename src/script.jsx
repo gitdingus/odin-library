@@ -157,14 +157,23 @@ const Library = (function (){
         return getBooks();
     }
 
+    function toggleReadStatus(index) { 
+        const bookIndex = _myLibrary.findIndex((book) => book.id === index);
+        _myLibrary[bookIndex].toggleRead();
+    }
+
+    function type() {
+        return 'volatile-library';
+    }
+
     return {
         getBooks, 
-        getLastBookAdded, 
         addBook, 
-        addBookFromInfo, 
-        addBooks, 
+        addBookFromInfo,
         removeBook, 
-        sortLibrary
+        sortLibrary,
+        toggleReadStatus,
+        type,
     }
 
 })();

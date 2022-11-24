@@ -136,7 +136,8 @@ const Library = (function (){
     }
 
     function removeBook(index){
-        _myLibrary.splice(index, 1);
+        const bookIndex = _myLibrary.findIndex((book) => book.id === index);
+        _myLibrary.splice(bookIndex, 1);
     }
 
     function sortLibrary(byField){

@@ -123,10 +123,7 @@ const Library = (function (){
     function getBooks(){
         return _myLibrary;
     }
-    
-    function getLastBookAdded(){
-        return _lastBookAdded;
-    }
+
     function addBook(book){
         book.id = uuid();
         _myLibrary.push(book);
@@ -136,11 +133,6 @@ const Library = (function (){
     function addBookFromInfo(title, author, numPages, read){
         const book = new Book(title, author, numPages, read);
         addBook(book);
-    }
-
-    //takes array of book objects
-    function addBooks(books){
-        books.forEach( (book) => addBook(book) );
     }
 
     function removeBook(index){

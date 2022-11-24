@@ -204,9 +204,71 @@ const volatileLibrary = function () {
         type,
     }
 
-})();
+}
 
-const libraryController = ( function (){
+const firebaseLibrary = function libraryBuiltOnFirebase() {
+    function addBook(book) {
+        const collectionRef = collection(firebaseDb, `/users/${currentUser.uid}/books/`).withConverter(bookFirestoreConverter);
+        addDoc(collectionRef, book);
+    }
+
+    function addBookFromInfo(title, author, pages, read){
+        const book = new Book(title, author, pages, read);
+        addBook(book);
+    }
+
+    async function getBooks() {
+        const collectionRef = collection(firebaseDb, `/users/${currentUser.uid}/books/`).withConverter(bookFirestoreConverter);
+        const querySnapshot = await getDocs(collectionRef)
+
+        return querySnapshot;
+    }
+
+    async function removeBook(id) {
+        const collectionRef = collection(firebaseDb, `/users/${currentUser.uid}/books/`).withConverter(bookFirestoreConverter);
+        const docRef = doc(collectionRef, id);
+
+        return deleteDoc(docRef);
+    }
+
+    async function sortLibrary(byField){
+        const collectionRef = collection(firebaseDb, `/users/${currentUser.uid}/books/`).withConverter(bookFirestoreConverter);
+
+        const q = query(collectionRef, orderBy(byField, 'asc'));
+        const snapshot = await getDocs(q);
+
+        return snapshot;
+    }
+
+    async function toggleReadStatus(id) {
+        const collectionRef = collection(firebaseDb, `/users/${currentUser.uid}/books/`).withConverter(bookFirestoreConverter);
+        const docRef = doc(collectionRef, id);
+
+        await runTransaction(firebaseDb, async (transaction) => {
+            const bookDoc = await transaction.get(docRef);
+            const newReadStatus = !bookDoc.get('read');
+
+            transaction.update(docRef, {
+                read: newReadStatus,
+            });
+        })
+    }
+
+    function type() {
+        return 'firebase-library';
+    }
+    return {
+        getBooks,
+        addBook,
+        addBookFromInfo,
+        removeBook,
+        sortLibrary,
+        toggleReadStatus,
+        type,
+    }
+}
+
+const libraryController = function (library){
     const _openAddBookModalButton = document.querySelector("#open-add-book-modal");
     const _cancelAddBookModalButton = document.querySelector("#cancel-add-book-button");
     const _addBookForm = document.querySelector("#add-book-form");

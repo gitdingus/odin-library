@@ -122,12 +122,28 @@ class Book {
             return true;
         }
 
-const volatileLibrary = function () {
 
     }
 }
 
-const Library = (function (){
+const bookFirestoreConverter = {
+    toFirestore: (book) => {
+        return {
+            title: book.title,
+            author: book.author,
+            numPages: book.numPages,
+            read: book.read,
+        }
+    },
+    fromFirestore: (snapshot, options) => {
+        const data = snapshot.data(options);
+
+        return (new Book(data.title, data.author, data.numPages, data.read));
+    },
+};
+
+
+const volatileLibrary = function () {
 
     const _myLibrary = [];
     let _lastBookAdded = {};

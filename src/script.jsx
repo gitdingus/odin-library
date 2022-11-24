@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Login from './components/Login.jsx';
+import { v4 as uuid } from 'uuid';
 import firebaseConfig from './firebase.config.js';
 import { initializeApp } from 'firebase/app';
 import { 
@@ -127,6 +128,7 @@ const Library = (function (){
         return _lastBookAdded;
     }
     function addBook(book){
+        book.id = uuid();
         _myLibrary.push(book);
         _lastBookAdded = book;
     }   
